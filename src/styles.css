@@ -91,7 +91,7 @@ body {
   color: #bcd7b6;
 }
 
-.task {
+.task-div {
   display: flex;
   align-items: center;
   width: 300px;
@@ -100,17 +100,27 @@ body {
   gap: 10px;
   font-size: 12px;
   margin: 12px auto;
+  background-color: #fff;
 }
 
-.todo-card .task {
+.task {
+  resize: none;
+  width: 100%;
+  /* height: 16px; */
+  border-color: Transparent; 
+  overflow: auto;
+  outline: none;
+}
+
+.todo-card .task-div {
   border: 1px solid #f3e1df;
 }
 
-.doing-card .task {
+.doing-card .task-div {
   border: 1px solid #eae2cf;
 }
 
-.done-card .task {
+.done-card .task-div {
   border: 1px solid #ddeed9;
 }
 
@@ -124,6 +134,7 @@ body {
   color: #d37a87;
   font-size: 13px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .plus {

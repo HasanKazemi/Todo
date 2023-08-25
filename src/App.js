@@ -1,6 +1,16 @@
+import { useState } from "react";
 import "./styles.css";
 
 export default function App() {
+  const [todoList, setTodoList] = useState([
+    "Start with meditation, exercise & breakfast for a productive day",
+    "Read to learn something new every day",
+    "Learn something fresh & relevant"
+  ]);
+  function addTask() {
+    setTodoList([...todoList, ""])
+  }
+
   return (
     <div className="App">
       <h1 className="task-title">✔ Task List</h1>
@@ -16,21 +26,17 @@ export default function App() {
             <span className="todo">Todo</span>
             <span className="todo-task-count">{3} Tasks</span>
           </div>
-          <div className="task">
-            <input type="checkbox" name="" />
-            <span>
-              Start with meditation, exercise & breakfast for a productive day
-            </span>
-          </div>
-          <div className="task">
-            <input type="checkbox" name="" />
-            <span>Read to learn something new every day</span>
-          </div>
-          <div className="task">
-            <input type="checkbox" name="" />
-            <span>Learn something fresh & relevant</span>
-          </div>
-          <div className="new-todo">
+
+          {todoList.map((task)=>{
+            return (
+              <div className="task-div">
+                <input type="checkbox" />
+                <textarea className="task"> {task} </textarea>
+              </div>
+            )
+          })}
+
+          <div className="new-todo" onClick={addTask}>
             <i className="plus">+</i>
             <span> New </span>
           </div>
@@ -43,11 +49,11 @@ export default function App() {
             </span>
             <span className="doing-task-count">{2} Tasks</span>
           </div>
-          <div className="task">
+          <div className="task-div">
             <input type="checkbox" name="" />
             <span>Engage & question in meetings</span>
           </div>
-          <div className="task">
+          <div className="task-div">
             <input type="checkbox" name="" />
             <span>Use time-blocking for effective days</span>
           </div>
@@ -64,11 +70,11 @@ export default function App() {
             </span>
             <span className="done-task-count">{2} Tasks</span>
           </div>
-          <div className="task">
+          <div className="task-div">
             <input type="checkbox" name="" checked="checked" />
             <del>Finished online course - check!</del>
           </div>
-          <div className="task">
+          <div className="task-div">
             <input type="checkbox" name="" checked="checked" />
             <del>
               Congratulate yourself for incorporating healthier habits into your
