@@ -1,14 +1,49 @@
 import { useState } from "react";
+import { Todo } from "./todo";
 import "./styles.css";
 
 export default function App() {
   const [todoList, setTodoList] = useState([
-    "Start with meditation, exercise & breakfast for a productive day",
-    "Read to learn something new every day",
-    "Learn something fresh & relevant"
+    {
+      id: 1,
+      isComplete: false,
+      task: "Start with meditation, exercise & breakfast for a productive day"
+    },
+    {
+      id: 2,
+      isComplete: false,
+      task: "Read to learn something new every day"
+    },
+    {
+      id: 3,
+      isComplete: false,
+      task: "Learn something fresh & relevant"
+    }
   ]);
+
   function addTask() {
-    setTodoList([...todoList, ""])
+    const newTodo = {
+      id: todoList[todoList.length - 1].id + 1,
+      isComplete: false,
+      task: ""
+    };
+    setTodoList([...todoList, newTodo]);
+  }
+  function handleHover(id, tf) {
+    todoList.forEach((todo) => {
+      if (id === todo.id && tf === "true") {
+        todo.isHovered = true;
+      } else {
+        todo.isHovered = false;
+      }
+    });
+  }
+  function deleteTodo(id) {
+    const newTodo = todoList.filter((to) => {
+      if (to.id === id) return false;
+      else return true;
+    });
+    setTodoList(newTodo);
   }
 
   return (
@@ -27,13 +62,15 @@ export default function App() {
             <span className="todo-task-count">{3} Tasks</span>
           </div>
 
-          {todoList.map((task)=>{
+          {todoList.map((todo, index) => {
             return (
-              <div className="task-div">
-                <input type="checkbox" />
-                <textarea className="task"> {task} </textarea>
-              </div>
-            )
+              <Todo
+                key={index}
+                todo={todo}
+                handleHover={handleHover}
+                deleteTodo={deleteTodo}
+              />
+            );
           })}
 
           <div className="new-todo" onClick={addTask}>
